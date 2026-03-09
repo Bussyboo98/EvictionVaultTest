@@ -17,11 +17,11 @@ contract EvictionVaultAccessControl is AccessControl, Pausable {
         _grantRole(OWNER_ROLE, admin);
     }
 
-    function pause() external onlyRole(PAUSER_ROLE) {
-        _pause();
+    function pause() external virtual onlyRole(PAUSER_ROLE) {
+    _pause();
     }
 
-    function unpause() external onlyRole(PAUSER_ROLE) {
+    function unpause() external virtual onlyRole(PAUSER_ROLE) {
         _unpause();
     }
 }

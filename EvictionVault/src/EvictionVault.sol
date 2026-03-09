@@ -162,11 +162,11 @@ contract EvictionVault is IEvictVault, EvictionVaultAccessControl, ReentrancyGua
 
     
 
-    function pause() external onlyRole(ADMIN_ROLE) whenNotPaused {
-        _pause(); 
-    }
+   function pause() external override(EvictionVaultAccessControl, IEvictVault) onlyRole(ADMIN_ROLE) whenNotPaused {
+    _pause();
+}
 
-    function unpause() external onlyRole(ADMIN_ROLE) whenPaused {
-        _unpause();
-    }
+function unpause() external override(EvictionVaultAccessControl, IEvictVault) onlyRole(ADMIN_ROLE) whenPaused {
+    _unpause();
+}
 }
