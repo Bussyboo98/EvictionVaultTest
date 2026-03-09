@@ -155,18 +155,16 @@ contract EvictionVault is IEvictVault, EvictionVaultAccessControl, ReentrancyGua
         require(success, "Emergency withdrawal failed");
     }
 
-    function verifySignature(address signer, bytes32 messageHash, bytes memory signature) external 
-    pure returns (bool) {
-        return messageHash.toEthSignedMessageHash().recover(signature) == signer;
+    function verifySignature(address signer, bytes32 messageHash, bytes memory signature) external pure returns (bool) {
+    return messageHash.toEthSignedMessageHash().recover(signature) == signer;
     }
-
     
 
    function pause() external override(EvictionVaultAccessControl, IEvictVault) onlyRole(ADMIN_ROLE) whenNotPaused {
     _pause();
 }
 
-function unpause() external override(EvictionVaultAccessControl, IEvictVault) onlyRole(ADMIN_ROLE) whenPaused {
-    _unpause();
-}
+    function unpause() external override(EvictionVaultAccessControl, IEvictVault) onlyRole(ADMIN_ROLE) whenPaused {
+        _unpause();
+    }
 }
