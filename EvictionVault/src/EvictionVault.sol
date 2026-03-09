@@ -157,14 +157,20 @@ contract EvictionVault is IEvictVault, EvictionVaultAccessControl, ReentrancyGua
 
     function verifySignature(address signer, bytes32 messageHash, bytes memory signature) external pure returns (bool) {
     return messageHash.toEthSignedMessageHash().recover(signature) == signer;
+
     }
     
 
-   function pause() external override(EvictionVaultAccessControl, IEvictVault) onlyRole(ADMIN_ROLE) whenNotPaused {
-    _pause();
-}
+    function pause() external override onlyRole(ADMIN_ROLE) whenNotPaused {
+        _pause();
+    }
 
-    function unpause() external override(EvictionVaultAccessControl, IEvictVault) onlyRole(ADMIN_ROLE) whenPaused {
+    function unpause() external override onlyRole(ADMIN_ROLE) whenPaused {
         _unpause();
     }
+
+    function paused() public view override(IEvictVault, EvictionVaultAccessControl) returns (bool) {
+        return super.paused();
+    }
+
 }
